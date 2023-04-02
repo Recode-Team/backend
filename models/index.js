@@ -2,7 +2,7 @@ const initModels = require('./init-models'); // init-models.js에서 메서드�
 const { Sequelize } = require('sequelize');
 
 const env = process.env.NODE_ENV || 'development';
-const config = require("../config/config.json")[env]
+const config = require("../config/config")[env]
 
 const sequelize = new Sequelize(config.database, config.username, config.password, config)
 

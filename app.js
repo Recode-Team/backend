@@ -1,6 +1,13 @@
 const express = require("express");
 const helmet = require("helmet");
 const helmetCsp = require("helmet-csp");
+<<<<<<< Updated upstream
+=======
+const nodemailer = require('nodemailer');
+const cors = require('cors');
+require("dotenv").config();
+
+>>>>>>> Stashed changes
 const app = express();
 
 app.set("port", 3000);
@@ -14,6 +21,20 @@ app.use(express.json());
 const router = require("./routes/index");
 app.use("/", router);
 
+<<<<<<< Updated upstream
+=======
+const whitelist = ["http://localhost:3000"];
+const corsOptions = {
+  origin: function (origin, callback) { 
+    if (whitelist.indexOf(origin) !== -1) { 
+      callback(null, true); 
+    } else {
+      callback(new Error("Not Allowed Origin!")); 
+    }
+  },
+};
+app.use(cors(corsOptions));
+>>>>>>> Stashed changes
 
 app.use("/", (req, res, next) => {
     let err = new Error(res.__("notFoundError"));
