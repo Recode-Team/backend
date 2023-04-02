@@ -1,19 +1,15 @@
 const express = require("express");
 const helmet = require("helmet");
 const helmetCsp = require("helmet-csp");
-<<<<<<< Updated upstream
-=======
 const nodemailer = require('nodemailer');
 const cors = require('cors');
 require("dotenv").config();
 
->>>>>>> Stashed changes
 const app = express();
 
-app.set("port", 3000);
+app.set("port", 27000);
 
 app.use(helmet());
-
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -21,8 +17,6 @@ app.use(express.json());
 const router = require("./routes/index");
 app.use("/", router);
 
-<<<<<<< Updated upstream
-=======
 const whitelist = ["http://localhost:3000"];
 const corsOptions = {
   origin: function (origin, callback) { 
@@ -34,7 +28,6 @@ const corsOptions = {
   },
 };
 app.use(cors(corsOptions));
->>>>>>> Stashed changes
 
 app.use("/", (req, res, next) => {
     let err = new Error(res.__("notFoundError"));

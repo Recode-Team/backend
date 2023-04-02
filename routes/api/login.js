@@ -1,38 +1,20 @@
 const express = require("express");
-<<<<<<< Updated upstream
-const { Sequelize } = require("sequelize");
-const { users, sequelize } = require("../../models/index");
-=======
 const sequelize = require("../../models/index");
 const crypto = require('crypto');
->>>>>>> Stashed changes
 
 const { SHA_KEY } = process.env;
 
 const router = express.Router();
 
 //test login api
-<<<<<<< Updated upstream
-router.post("/login", async(req, res, next) => {
-
-    
-    let { email, password } = req.body;
-
-    let sql = `SELECT email, password FROM user WHERE email='${email}' AND password='${password}`;
-    
-    
-=======
 router.get("/test", async(req, res) => {
     let { email, password } = req.query;
 
->>>>>>> Stashed changes
     try{
-        // sequelize.sql(sql)
         let result = false;
         if(email == "test" && password == "password"){
             result = true;
         }
-
         res.status(200).send({
             data: result,
         });
@@ -42,8 +24,6 @@ router.get("/test", async(req, res) => {
         });
     }
 });
-<<<<<<< Updated upstream
-=======
 
 //login api
 router.get("/", async(req, res) => {
@@ -90,6 +70,5 @@ router.get("/", async(req, res) => {
         res.status(200).send(result);
     }
 });
->>>>>>> Stashed changes
 
 module.exports = router;
