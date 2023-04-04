@@ -6,24 +6,6 @@ const { SHA_KEY } = process.env;
 
 const router = express.Router();
 
-//test login api
-router.get("/test", async(req, res) => {
-    let { email, password } = req.query;
-
-    try{
-        let result = false;
-        if(email == "test" && password == "password"){
-            result = true;
-        }
-        res.status(200).send({
-            data: result,
-        });
-    } catch(err) {
-        res.status(500).send({
-            data: false,
-        });
-    }
-});
 
 //login api
 router.get("/", async(req, res) => {

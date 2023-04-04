@@ -1,23 +1,23 @@
 const swaggerUi = require("swagger-ui-express")
 const swaggereJsdoc = require("swagger-jsdoc")
+const swaggerAutogen = require("swagger-autogen")();
 
-const options = {
-  swaggerDefinition: {
-    openapi: "3.0.0",
-    info: {
-      version: "1.0.0",
-      title: "recode_api",
-      description:
-        "멀티 디지털 화이트보드 웹",
-    },
-    servers: [
-      {
-        url: "http://localhost:27000", // 요청 URL
-      },
-    ],
+const doc = {
+  info: {
+    title: "My API",
+    description: "Description",
   },
-  apis: ["./routes/*.js", "./routes/api/*.js"], //Swagger 파일 연동
-}
-const specs = swaggereJsdoc(options)
+  host: "localhost",
+  schemes: [],
+};
 
-module.exports = { swaggerUi, specs }
+const outputFile = "./swagger-output.json";
+const endpointsFiles = [
+  "./app.js",
+  "./routes/index.js",
+  "./routes/api/login.js",
+  "./routes/api/register.js",
+  "./routes/api/mailsender.js"
+];
+
+swaggerAutogen(outputFile, endpointsFiles, doc);
