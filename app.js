@@ -18,7 +18,7 @@ const router = require("./routes/index");
 app.use("/", router);
 app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerFile)) 
 
-const whitelist = ["http://127.0.0.1:3000"];
+const whitelist = ["http://localhost:3000"];
 const corsOptions = {
   origin: function (origin, callback) { 
     if (whitelist.indexOf(origin) !== -1) { 
