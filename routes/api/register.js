@@ -15,7 +15,8 @@ router.post("/", async(req, res, next) => {
     const user = await sequelize.user.create(
             {email: email, password: hashed, name: nickname})
         .catch(err => {
-            console.log(err)
+            result['status'] = "conflict";
+            res.status(409).send(result);
         })
 
     if (user == undefined){
