@@ -5,7 +5,7 @@ const nodemailer = require('nodemailer');
 const cors = require('cors');
 const swaggerFile = require("./swagger-output.json");
 const swaggerUi = require("swagger-ui-express")
-require("dotenv").config();
+require("dotenv").config({ path: ".env" });
 
 const app = express();
 app.set("port", 27000);

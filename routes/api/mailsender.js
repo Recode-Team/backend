@@ -28,7 +28,7 @@ router.post("/code", function(req, res, next){
       "감사합니다.<br /><br />"+
       "</p>"+
       "인증번호: <br />"+
-      "<span style='font-size: 24px;'>"+key+"</span><br /><br />"+
+      "<span style='font-size: 24px;'>"+ key +"</span><br /><br />"+
 
       "recode 팀 드림"
       ,

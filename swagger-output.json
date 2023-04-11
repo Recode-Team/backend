@@ -11,7 +11,7 @@
     "http"
   ],
   "paths": {
-    "/api/regiser": {
+    "/api/register": {
       "post": {
         "description": "",
         "parameters": [
@@ -27,7 +27,7 @@
                 "password": {
                   "example": "any"
                 },
-                "nickname": {
+                "name": {
                   "example": "any"
                 }
               }
@@ -68,14 +68,14 @@
             "in": "query",
             "name": "email",
             "schema": {
-              "type": "string"
+              "type": "object"
             }
           },
           {
             "in": "query",
             "name": "password",
             "schema":{
-              "type": "string"
+              "type": "object"
             }
           }
         ],
