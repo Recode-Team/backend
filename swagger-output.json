@@ -1,0 +1,164 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "My API",
+    "description": "Description",
+    "version": "1.0.0"
+  },
+  "host": "127.0.0.1:27000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/api/register": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "example": "any@mail.com"
+                },
+                "password": {
+                  "example": "any"
+                },
+                "name": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "회원 가입 성공",
+            "schema":{
+              "properties": {
+                "status": {
+                  "type": "object",
+                  "example": "ok"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "회원 가입 실패",
+            "schema":{
+              "properties": {
+                "status": {
+                  "type": "object",
+                  "example": "Conflict"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/login": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "email",
+            "schema": {
+              "type": "object"
+            }
+          },
+          {
+            "in": "query",
+            "name": "password",
+            "schema":{
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "로그인 성공",
+            "schema":{
+              "properties": {
+                "status": {
+                  "type": "object",
+                  "example": "ok"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "로그인 이메일 또는 비밀번호가 일치하지 않음",
+            "schema":{
+              "properties": {
+                "status": {
+                  "type": "object",
+                  "example": "not found"
+                },
+                "results": {
+                  "type": "object",
+                  "example": [{"target" : "password or email"}]
+                } 
+              }
+            }
+          }
+        }
+      }  
+    },
+    "/api/sendmail/code": {
+      "post": {
+        "description": "인증 문자 보내기",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "String 인증문자를 돌려줌",
+            "schema":{
+              "properties": {
+                "status": {
+                  "type": "object",
+                  "example": "ok"
+                },
+                "results": {
+                  "type": "object",
+                  "example": [{"key" : "key value"}]
+                } 
+              }
+            }
+          },
+          "400": {
+            "description": "false를 돌려줌",
+            "schema":{
+              "properties": {
+                "status": {
+                  "type": "object",
+                  "example": "bad request"
+                },
+                "results": {
+                  "type": "object",
+                  "example": [{"key" : false}]
+                } 
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
