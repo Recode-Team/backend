@@ -11,7 +11,7 @@
     "http"
   ],
   "paths": {
-    "/api/regiser": {
+    "/api/register": {
       "post": {
         "description": "",
         "parameters": [
@@ -22,12 +22,12 @@
               "type": "object",
               "properties": {
                 "email": {
-                  "example": "any"
+                  "example": "any@mail.com"
                 },
                 "password": {
                   "example": "any"
                 },
-                "nickname": {
+                "name": {
                   "example": "any"
                 }
               }
@@ -36,10 +36,26 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "회원 가입 성공",
+            "schema":{
+              "properties": {
+                "status": {
+                  "type": "object",
+                  "example": "ok"
+                }
+              }
+            }
           },
           "409": {
-            "description": "Conflict"
+            "description": "회원 가입 실패",
+            "schema":{
+              "properties": {
+                "status": {
+                  "type": "object",
+                  "example": "Conflict"
+                }
+              }
+            }
           }
         }
       }
@@ -52,45 +68,50 @@
             "in": "query",
             "name": "email",
             "schema": {
-              "type": "string"
+              "type": "object"
             }
           },
           {
             "in": "query",
             "name": "password",
             "schema":{
-              "type": "string"
+              "type": "object"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "로그인 성공",
+            "schema":{
+              "properties": {
+                "status": {
+                  "type": "object",
+                  "example": "ok"
+                }
+              }
+            }
           },
           "404": {
-            "description": "Conflict",
-            "content":{
-              "application/json":{
-                "properties":{
-                  "status": {
-                    "type": "object",
-                    "example": "not found",
-                    "description": "status"
-                  },
-                  "results": {
-                    "type": "object",
-                    "example": [{"target" : "password or email"}]
-                  } 
-                }
+            "description": "로그인 이메일 또는 비밀번호가 일치하지 않음",
+            "schema":{
+              "properties": {
+                "status": {
+                  "type": "object",
+                  "example": "not found"
+                },
+                "results": {
+                  "type": "object",
+                  "example": [{"target" : "password or email"}]
+                } 
               }
             }
           }
         }
-      }
+      }  
     },
     "/api/sendmail/code": {
       "post": {
-        "description": "",
+        "description": "인증 문자 보내기",
         "parameters": [
           {
             "name": "body",
@@ -107,10 +128,34 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "String 인증문자를 돌려줌",
+            "schema":{
+              "properties": {
+                "status": {
+                  "type": "object",
+                  "example": "ok"
+                },
+                "results": {
+                  "type": "object",
+                  "example": [{"key" : "key value"}]
+                } 
+              }
+            }
           },
           "400": {
-            "description": "Bad Request"
+            "description": "false를 돌려줌",
+            "schema":{
+              "properties": {
+                "status": {
+                  "type": "object",
+                  "example": "bad request"
+                },
+                "results": {
+                  "type": "object",
+                  "example": [{"key" : false}]
+                } 
+              }
+            }
           }
         }
       }
