@@ -5,8 +5,8 @@
     "description": "Description",
     "version": "1.0.0"
   },
-  "host": "127.0.0.1:27000",
-  "basePath": "/",
+  "host": "localhost:27000",
+  "basePath": "",
   "schemes": [
     "http"
   ],
