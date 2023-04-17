@@ -13,15 +13,11 @@ module.exports = function(sequelize, DataTypes) {
     name: {
       type: DataTypes.STRING(50),
       allowNull: false
-    },
-    setting: {
-      type: DataTypes.INTEGER,
-      allowNull: true
     }
   }, {
     sequelize,
     tableName: 'user',
-    timestamps: false,
+    timestamps: true,
     indexes: [
       {
         name: "PRIMARY",
