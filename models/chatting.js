@@ -7,26 +7,30 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true
     },
-    group_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
     email: {
       type: DataTypes.STRING(50),
       allowNull: false
     },
-    group_name: {
+    group_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    datetime: {
+      type: DataTypes.DATE,
+      allowNull: false
+    },
+    nickname: {
       type: DataTypes.STRING(50),
       allowNull: false
     },
     text: {
       type: DataTypes.STRING(100),
-      allowNull: false
+      allowNull: true
     }
   }, {
     sequelize,
     tableName: 'chatting',
-    timestamps: true,
+    timestamps: false,
     indexes: [
       {
         name: "PRIMARY",
