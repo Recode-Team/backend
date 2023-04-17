@@ -1,5 +1,10 @@
 const SequelizeAuto = require('sequelize-auto');
-const auto = new SequelizeAuto("recode", "root", "password", {
+require("dotenv").config({ path: ".env" });
+const { DB_PASSWORD } = process.env;
+
+console.log(DB_PASSWORD)
+
+const auto = new SequelizeAuto("recode", "root", DB_PASSWORD, {
       host: "127.0.0.1",
       port: "3307",
       dialect: "mysql",

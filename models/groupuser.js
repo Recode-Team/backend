@@ -1,27 +1,25 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('group', {
+  return sequelize.define('groupuser', {
     group_id: {
-      autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    group_name: {
+    email: {
       type: DataTypes.STRING(50),
-      allowNull: false
+      allowNull: false,
+      primaryKey: true,
+      comment: "user-email"
     },
-    group_comment: {
+    name: {
       type: DataTypes.STRING(50),
-      allowNull: false
-    },
-    creator: {
-      type: DataTypes.STRING(50),
-      allowNull: false
+      allowNull: false,
+      comment: "use group nickname"
     }
   }, {
     sequelize,
-    tableName: 'group',
+    tableName: 'groupuser',
     timestamps: true,
     indexes: [
       {
@@ -30,6 +28,7 @@ module.exports = function(sequelize, DataTypes) {
         using: "BTREE",
         fields: [
           { name: "group_id" },
+          { name: "email" },
         ]
       },
     ]
