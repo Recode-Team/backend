@@ -24,7 +24,7 @@ router.get("/", async(req, res) => {
     })
 
     let userPass = await sequelize.user.findOne({
-        attributes: ['email', 'password'],
+        attributes: ['email', 'password', 'name'],
         where: {
             email: email,
             password: hashed
@@ -49,6 +49,7 @@ router.get("/", async(req, res) => {
     }
     else{
         result['status']  = "ok"
+        result['results'] = {"name": userPass['name']}
         res.status(200).send(result);
     }
 });

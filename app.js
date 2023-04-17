@@ -22,20 +22,13 @@ const whitelist = ["http://localhost:3000"];
 const corsOptions = {
   origin: function (origin, callback) { 
     if (whitelist.indexOf(origin) !== -1) { 
-      callback(null, true); 
+      callback(null, true); // cors 허용
     } else {
       callback(new Error("Not Allowed Origin!")); 
     }
   },
 };
 app.use(cors(corsOptions));
-
-app.use("/", (req, res, next) => {
-    let err = new Error(res.__("notFoundError"));
-    err.status = 404;
-    next(err);
-});
-
 
 app.use((err, req, res, next) => {
     err.status = err.status || 500;
