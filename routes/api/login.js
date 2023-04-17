@@ -34,15 +34,14 @@ router.get("/", async(req, res) => {
         console.log(err)
     })
 
-    console.log(typeof userEmail, userEmail)
     // email not found
-    if(userEmail == null){
+    if(userEmail == undefined){
         result['status']  = "not found";
         result['results'] = {"target" : "email"};
         res.status(404).send(result);
     }
     // password not found
-    else if(userPass == null){
+    else if(userPass == undefined){
         result['status']  = "not found";
         result['results'] = {"target" : "password"};
         res.status(404).send(result);
