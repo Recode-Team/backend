@@ -1,9 +1,11 @@
 const express = require('express');
 const sequelize = require("../../models/index");
+
 const { SHA_KEY } = process.env;
 const crypto = require('crypto');
 
 const router = express.Router();
+
 
 router.post("/", async(req, res, next) => {
     let { email, password, name } = req.body;

@@ -1,15 +1,14 @@
 const express = require("express");
 const sequelize = require("../../models/index");
 const crypto = require('crypto');
-
-const { SHA_KEY } = process.env;
+const jwt = require('jsonwebtoken');
+const { JWT_KEY, SHA_KEY } = process.env;
 
 const router = express.Router();
 
-
 //login api
-router.get("/", async(req, res) => {
-    let { email, password } = req.query;
+router.post("/", async(req, res) => {
+    let { email, password } = req.body;
     let result = {"results":{}, "status":""};
     const hashed = crypto.createHmac('sha256', SHA_KEY).update(password).digest('hex');
     
@@ -47,8 +46,15 @@ router.get("/", async(req, res) => {
         res.status(404).send(result);
     }
     else{
+        token = jwt.sign({
+            type: 'JWT',
+            nickname: email,
+          }, JWT_KEY, {
+            expiresIn: '15m', // 만료시간 15분
+            issuer: 'yhw',
+          });
         result['status']  = "ok"
-        result['results'] = {"name": userPass['name']}
+        result['results'] = {"name": userPass['name'], "token": token}
         res.status(200).send(result);
     }
 });

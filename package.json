@@ -1,16 +1,19 @@
 {
   "dependencies": {
-    "body-parser": "^1.20.2",
+    "axios": "^1.4.0",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "helmet": "^6.0.1",
     "helmet-csp": "^3.4.0",
+    "jsonwebtoken": "^9.0.0",
     "mysql": "^2.18.1",
     "mysql2": "^3.2.0",
     "nodemailer": "^6.9.1",
     "nodemon": "^2.0.21",
+    "openai": "^3.2.1",
+    "rand-token": "^1.0.1",
     "sequelize": "^6.29.3",
     "sequelize-auto": "^0.8.8",
     "swagger-autogen": "^2.23.1"
