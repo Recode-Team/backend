@@ -1,10 +1,15 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('user', {
-    email: {
-      type: DataTypes.STRING(50),
+    id: {
+      autoIncrement: true,
+      type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
+    },
+    email: {
+      type: DataTypes.STRING(50),
+      allowNull: false
     },
     password: {
       type: DataTypes.STRING(200),
@@ -24,7 +29,7 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "email" },
+          { name: "id" },
         ]
       },
     ]

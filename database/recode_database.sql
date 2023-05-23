@@ -19,14 +19,14 @@ USE `recode`;
 
 -- 테이블 recode.chatting 구조 내보내기
 CREATE TABLE IF NOT EXISTS `chatting` (
-  `catting_id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `group_id` int(20) NOT NULL,
-  `email` varchar(50) COLLATE armscii8_bin NOT NULL,
-  `group_name` varchar(50) COLLATE armscii8_bin NOT NULL,
-  `text` varchar(100) COLLATE armscii8_bin NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `group_name` varchar(50) NOT NULL,
+  `text` varchar(100) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`catting_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=armscii8 COLLATE=armscii8_bin;
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- 테이블 데이터 recode.chatting:~0 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `chatting` DISABLE KEYS */;
@@ -34,13 +34,13 @@ CREATE TABLE IF NOT EXISTS `chatting` (
 
 -- 테이블 recode.group 구조 내보내기
 CREATE TABLE IF NOT EXISTS `group` (
-  `group_id` int(11) NOT NULL AUTO_INCREMENT,
-  `group_name` varchar(50) COLLATE armscii8_bin NOT NULL,
-  `group_comment` varchar(50) COLLATE armscii8_bin NOT NULL,
-  `creator` varchar(50) COLLATE armscii8_bin NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `comment` varchar(50) NOT NULL,
+  `creator` varchar(50) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`group_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=armscii8 COLLATE=armscii8_bin;
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 -- 테이블 데이터 recode.group:~0 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `group` DISABLE KEYS */;
@@ -49,32 +49,43 @@ CREATE TABLE IF NOT EXISTS `group` (
 -- 테이블 recode.groupuser 구조 내보내기
 CREATE TABLE IF NOT EXISTS `groupuser` (
   `group_id` int(20) NOT NULL,
-  `email` varchar(50) COLLATE armscii8_bin NOT NULL COMMENT 'user-email',
-  `name` varchar(50) COLLATE armscii8_bin NOT NULL COMMENT 'use group nickname',
+  `email` varchar(50) NOT NULL COMMENT 'user-email',
+  `name` varchar(50) NOT NULL COMMENT 'use group nickname',
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`group_id`,`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=armscii8 COLLATE=armscii8_bin;
+  PRIMARY KEY (`group_id`,`email`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 -- 테이블 데이터 recode.groupuser:~0 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `groupuser` DISABLE KEYS */;
 /*!40000 ALTER TABLE `groupuser` ENABLE KEYS */;
 
--- 테이블 recode.user 구조 내보내기
-CREATE TABLE IF NOT EXISTS `user` (
-  `email` varchar(50) COLLATE armscii8_bin NOT NULL,
-  `password` varchar(200) COLLATE armscii8_bin NOT NULL,
-  `name` varchar(50) COLLATE armscii8_bin NOT NULL,
+-- 테이블 recode.minutes 구조 내보내기
+CREATE TABLE IF NOT EXISTS `minutes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `transcription` mediumtext NOT NULL COMMENT '요약하기 전의 대화',
+  `summary` mediumtext NOT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  PRIMARY KEY (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=armscii8 COLLATE=armscii8_bin;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COMMENT='회의록 테이블';
 
--- 테이블 데이터 recode.user:~3 rows (대략적) 내보내기
+-- 테이블 데이터 recode.minutes:~0 rows (대략적) 내보내기
+/*!40000 ALTER TABLE `minutes` DISABLE KEYS */;
+/*!40000 ALTER TABLE `minutes` ENABLE KEYS */;
+
+-- 테이블 recode.user 구조 내보내기
+CREATE TABLE IF NOT EXISTS `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(50) NOT NULL,
+  `password` varchar(200) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3;
+
+-- 테이블 데이터 recode.user:~0 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT IGNORE INTO `user` (`email`, `password`, `name`, `created_at`, `updated_at`) VALUES
-	('dfs@df.com', 'd0f05820661a920a9a71238f280861650d000cb52f11489ac394f8ba72e2c35c', 'DF', '2023-04-17 13:42:17', '2023-04-17 13:42:17'),
-	('dfsfafwe@df.com', 'd0f05820661a920a9a71238f280861650d000cb52f11489ac394f8ba72e2c35c', 'DF', '2023-04-17 13:41:47', '2023-04-17 13:41:47'),
-	('dfsfafwe@hkd.com', 'd0f05820661a920a9a71238f280861650d000cb52f11489ac394f8ba72e2c35c', 'DF', '2023-04-17 13:41:26', '2023-04-17 13:41:26');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
