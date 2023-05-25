@@ -1,10 +1,10 @@
-let express = require('express');
-let http = require('http');
-let app = express();
-let cors = require('cors');
-let server = http.createServer(app);
-let socketio = require('socket.io');
-let io = socketio.listen(server);
+const express = require('express');
+const http = require('http');
+const app = express();
+const cors = require('cors');
+const server = http.createServer(app);
+const socketio = require('socket.io');
+const io = socketio.listen(server);
 
 app.use(cors());
 const PORT = process.env.PORT || 8080;

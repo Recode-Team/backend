@@ -39,7 +39,7 @@ router.post('/', upload.single('audioFile'), async (req, res) => {
 
   fileStream.on('error', err => {
     console.error(err);
-    res.status(500).send('오디오 파일 업로드에 실패했습니다.');
+    res.status(500).send({"result" : undefined, "state": "오디오 파일을 찾지 못했습니다."});
   });
 
   fileStream.on('finish', async () => {
@@ -60,17 +60,14 @@ router.post('/', upload.single('audioFile'), async (req, res) => {
     // 오디오 긴 파일
     const [operation] = await client.longRunningRecognize(requestOptions);
     const [response] = await operation.promise();
-    // const [response] = await client.recognize(requestOptions);
+    
     const transcription = response.results
       .map(result => result.alternatives[0].transcript)
       .join('\n');
 
-    // console.log("stt 변환: ");
-    // console.log(transcription);
-
     // OpenAI GPT-3 API를 사용하여 회의록 생성
-    const prompt = `${transcription}\n\n요약:\n\n`; // GPT에 입력할 문장
-    const requestBody = { // GPT에 문장 전송
+    const prompt = `${transcription}\n\n요약:\n\n`; 
+    const requestBody = { 
       prompt: prompt,
       max_tokens: 1024,
       temperature: 0.5,
@@ -84,7 +81,10 @@ router.post('/', upload.single('audioFile'), async (req, res) => {
         'Authorization': `Bearer ${gptApiKey}`,
       },
       body: JSON.stringify(requestBody),
-    });
+    })
+    .catch( err => {
+      console.log(err)
+    })
     const json = await gptResponse.json();
     const summary = json.choices[0].text;
 
@@ -93,6 +93,7 @@ router.post('/', upload.single('audioFile'), async (req, res) => {
     .catch(err => {
         console.error(err)
     })
+
     if (dresult == undefined){
       res.status(409).send({'status' : "conflict"});
     }
