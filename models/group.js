@@ -1,17 +1,17 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('group', {
-    group_id: {
+    id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    group_name: {
+    name: {
       type: DataTypes.STRING(50),
       allowNull: false
     },
-    group_comment: {
+    comment: {
       type: DataTypes.STRING(50),
       allowNull: false
     },
@@ -29,7 +29,7 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "group_id" },
+          { name: "id" },
         ]
       },
     ]
