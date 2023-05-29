@@ -62,15 +62,14 @@ CREATE TABLE IF NOT EXISTS `groupuser` (
 -- 테이블 recode.minutes 구조 내보내기
 CREATE TABLE IF NOT EXISTS `minutes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `transcription` mediumtext NOT NULL COMMENT '요약하기 전의 대화',
-  `summary` mediumtext NOT NULL,
+  `title` text NOT NULL,
+  `transcription` text NOT NULL COMMENT '요약하기 전의 대화',
+  `summary` text NOT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COMMENT='회의록 테이블';
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb3 COMMENT='회의록 테이블';
 
--- 테이블 데이터 recode.minutes:~0 rows (대략적) 내보내기
-/*!40000 ALTER TABLE `minutes` DISABLE KEYS */;
 /*!40000 ALTER TABLE `minutes` ENABLE KEYS */;
 
 -- 테이블 recode.user 구조 내보내기

@@ -23,7 +23,9 @@
     "sequelize-auto": "^0.8.8",
     "socket.io": "^4.6.1",
     "swagger-autogen": "^2.23.1",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.0",
+    "y-websocket": "^1.5.0",
+    "yjs": "^13.6.1"
   },
   "devDependencies": {
     "swagger-jsdoc": "^6.2.8",

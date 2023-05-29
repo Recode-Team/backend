@@ -2,7 +2,7 @@ const express = require('express');
 const fetch = require('node-fetch');
 const speech = require('@google-cloud/speech');
 const multer = require('multer');
-const sequelize = require("../../../../models/index");
+const { minutes } = require("../../../../models");
 const upload = multer();
 
 const router = express.Router();
@@ -66,14 +66,15 @@ router.post('/', upload.single('audioFile'), async (req, res) => {
       .join('\n');
 
     // OpenAI GPT-3 API를 사용하여 회의록 생성
-    const prompt = `${transcription}\n\n요약:\n\n`; 
+    const prompt = `${transcription}\n\n짧게 끊어서 중요한 요점이나 요약 문장을 나열 (Markdown 언어로 표현) : \n\n\n\n`; 
     const requestBody = { 
       prompt: prompt,
       max_tokens: 1024,
       temperature: 0.5,
       n: 1,
-      stop: '\n\n',
+      stop: '\n\n\n\n',
     };
+
     const gptResponse = await fetch(`https://api.openai.com/v1/engines/${engine}/completions`, {
       method: 'POST',
       headers: {
@@ -86,10 +87,37 @@ router.post('/', upload.single('audioFile'), async (req, res) => {
       console.log(err)
     })
     const json = await gptResponse.json();
-    const summary = json.choices[0].text;
+    const summary = await json.choices[0].text;
 
-    const dresult = await sequelize.minutes.create(
-      {transcription : transcription, summary : summary})
+    tilePrompt = `${summary}\n 회의 제목 (회의 내용과 동일한 언어로 작성, 15byte 이내) : \n`
+    const titleRequestBody = { 
+      prompt: tilePrompt,
+      max_tokens: 1024,
+      temperature: 0.5,
+      n: 1,
+      stop: '\n\n',
+    };
+
+
+    // 회의 제목 (회의 내용과 동일한 언어로 작성) : 
+    const gptTitle = await fetch(`https://api.openai.com/v1/engines/${engine}/completions`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${gptApiKey}`,
+      },
+      body: JSON.stringify(titleRequestBody),
+    })
+    .catch( err => {
+      console.log(err)
+    })
+  
+    const jsonTitle = await gptTitle.json();
+    console.log(jsonTitle)
+    const titleSummary = await jsonTitle.choices[0].text;
+
+    const dresult = await minutes.create(
+      {transcription : transcription, summary : summary, title: titleSummary})
     .catch(err => {
         console.error(err)
     })
@@ -98,7 +126,7 @@ router.post('/', upload.single('audioFile'), async (req, res) => {
       res.status(409).send({'status' : "conflict"});
     }
     else {
-      res.send({"result" : {"transcription" : transcription, "summary" : summary}});
+      res.send({"result" : {"transcription" : transcription, "summary" : summary, "title": titleSummary}});
     }
   });
 

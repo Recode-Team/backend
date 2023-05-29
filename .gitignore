@@ -170,5 +170,6 @@ $RECYCLE.BIN/
 ./config/config.json
 
 googleAuth.json
-
+*.key
+*.crt
 # End of https://www.toptal.com/developers/gitignore/api/windows,node

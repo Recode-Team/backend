@@ -1,6 +1,6 @@
 const SequelizeAuto = require('sequelize-auto');
 require("dotenv").config({ path: ".env" });
-const { DB_PASSWORD } = process.env;
+const { DB_PASSWORD, DB_PORT } = process.env;
 
 console.log(DB_PASSWORD)
 
