@@ -7,18 +7,18 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true
     },
+    title: {
+      type: DataTypes.TEXT,
+      allowNull: false
+    },
     transcription: {
       type: DataTypes.TEXT,
       allowNull: false,
-      comment: "요약하기 전의 대화",
-      charset: 'utf8mb4', // 문자셋 지정
-      collate: 'utf8mb4_unicode_ci', // 정렬 지정
+      comment: "요약하기 전의 대화"
     },
     summary: {
       type: DataTypes.TEXT,
-      allowNull: false,
-      charset: 'utf8mb4', // 문자셋 지정
-      collate: 'utf8mb4_unicode_ci', // 정렬 지정
+      allowNull: false
     }
   }, {
     sequelize,

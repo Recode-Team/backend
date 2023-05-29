@@ -5,8 +5,15 @@ const nodemailer = require('nodemailer');
 const cors = require('cors');
 const swaggerFile = require("./swagger-output.json");
 const swaggerUi = require("swagger-ui-express")
+const fs = require('fs');
+const https = require('https');
 
 require("dotenv").config({ path: ".env" });
+
+const options = {
+    key: fs.readFileSync('recode.key'),       // 개인 키 파일 경로
+    cert: fs.readFileSync('recode.crt'),  // SSL 인증서 파일 경로
+  };
 
 const app = express();
 app.set("port", 27000);
@@ -43,3 +50,7 @@ app.use((err, req, res, next) => {
 app.listen(app.get("port"), function() {
     console.log(`127.0.0.1:${app.get("port")}`);
 });
+
+https.createServer(options, app).listen(27443, () => {
+    console.log(`Express server listening on port ${27443}`);
+  });

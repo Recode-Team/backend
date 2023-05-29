@@ -1,3 +1,5 @@
+// Recode\Backend\routes\index.js
+
 const express = require("express");
 const router = express();
 
@@ -7,7 +9,7 @@ const api = {
     mailRouter: require('./api/mailsender'),
     createGroupRouter: require('./api/group/create'),
     createMinutesRouter: require('./api/chatGPT/minutes/create'),
-    createVoiceServer:require('./api/voice/server')
+    updateMinutesRouter: require('./api/chatGPT/minutes/update')
 };
 
 router.use("/api/login", api.loginRouter);
@@ -15,6 +17,6 @@ router.use("/api/register", api.registerRouter);
 router.use("/api/sendmail", api.mailRouter);
 router.use("/api/group/create", api.createGroupRouter);
 router.use("/api/gpt/minutes/create", api.createMinutesRouter);
-router.use("/api/voice/server", api.createVoiceServer);
+router.use("/", api.updateMinutesRouter);
 
 module.exports = router;
