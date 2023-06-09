@@ -48,7 +48,7 @@ router.post("/", async(req, res) => {
     else{
         token = jwt.sign({
             type: 'JWT',
-            nickname: email,
+            name: email,
           }, JWT_KEY, {
             expiresIn: '15m', // 만료시간 15분
             issuer: 'yhw',

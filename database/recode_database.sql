@@ -22,15 +22,12 @@ CREATE TABLE IF NOT EXISTS `chatting` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `group_id` int(20) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `group_name` varchar(50) NOT NULL,
   `text` varchar(100) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- 테이블 데이터 recode.chatting:~0 rows (대략적) 내보내기
-/*!40000 ALTER TABLE `chatting` DISABLE KEYS */;
-/*!40000 ALTER TABLE `chatting` ENABLE KEYS */;
+-- 내보낼 데이터가 선택되어 있지 않습니다.
 
 -- 테이블 recode.group 구조 내보내기
 CREATE TABLE IF NOT EXISTS `group` (
@@ -39,25 +36,34 @@ CREATE TABLE IF NOT EXISTS `group` (
   `comment` varchar(50) NOT NULL,
   `creator` varchar(50) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
 
--- 테이블 데이터 recode.group:~0 rows (대략적) 내보내기
-/*!40000 ALTER TABLE `group` DISABLE KEYS */;
-/*!40000 ALTER TABLE `group` ENABLE KEYS */;
+-- 내보낼 데이터가 선택되어 있지 않습니다.
+
+-- 테이블 recode.groupalarm 구조 내보내기
+CREATE TABLE IF NOT EXISTS `groupalarm` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `group_id` int(11) NOT NULL DEFAULT 0,
+  `alarm` varchar(200) CHARACTER SET armscii8 NOT NULL DEFAULT '0',
+  `created_at` int(11) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=armscii8 COLLATE=armscii8_bin;
+
+-- 내보낼 데이터가 선택되어 있지 않습니다.
 
 -- 테이블 recode.groupuser 구조 내보내기
 CREATE TABLE IF NOT EXISTS `groupuser` (
   `group_id` int(20) NOT NULL,
   `email` varchar(50) NOT NULL COMMENT 'user-email',
   `name` varchar(50) NOT NULL COMMENT 'use group nickname',
+  `alarm` int(11) NOT NULL DEFAULT 1 COMMENT '1 or 0',
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`group_id`,`email`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
--- 테이블 데이터 recode.groupuser:~0 rows (대략적) 내보내기
-/*!40000 ALTER TABLE `groupuser` DISABLE KEYS */;
-/*!40000 ALTER TABLE `groupuser` ENABLE KEYS */;
+-- 내보낼 데이터가 선택되어 있지 않습니다.
 
 -- 테이블 recode.minutes 구조 내보내기
 CREATE TABLE IF NOT EXISTS `minutes` (
@@ -70,7 +76,7 @@ CREATE TABLE IF NOT EXISTS `minutes` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb3 COMMENT='회의록 테이블';
 
-/*!40000 ALTER TABLE `minutes` ENABLE KEYS */;
+-- 내보낼 데이터가 선택되어 있지 않습니다.
 
 -- 테이블 recode.user 구조 내보내기
 CREATE TABLE IF NOT EXISTS `user` (
@@ -78,14 +84,26 @@ CREATE TABLE IF NOT EXISTS `user` (
   `email` varchar(50) NOT NULL,
   `password` varchar(200) NOT NULL,
   `name` varchar(50) NOT NULL,
+  `image` varchar(50) DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3;
 
--- 테이블 데이터 recode.user:~0 rows (대략적) 내보내기
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+-- 내보낼 데이터가 선택되어 있지 않습니다.
+
+-- 테이블 recode.whiteboard 구조 내보내기
+CREATE TABLE IF NOT EXISTS `whiteboard` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) CHARACTER SET utf8mb3 NOT NULL DEFAULT '',
+  `comment` varchar(200) CHARACTER SET utf8mb3 DEFAULT NULL,
+  `creater` varchar(50) CHARACTER SET utf8mb3 NOT NULL DEFAULT '0',
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=armscii8 COLLATE=armscii8_bin;
+
+-- 내보낼 데이터가 선택되어 있지 않습니다.
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
