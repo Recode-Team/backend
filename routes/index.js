@@ -7,7 +7,7 @@ const api = {
     loginRouter: require("./api/login"),
     registerRouter: require("./api/register"),
     mailRouter: require('./api/mailsender'),
-    createGroupRouter: require('./api/group/create'),
+    groupRouter: require('./api/group/index'),
     createMinutesRouter: require('./api/chatGPT/minutes/create'),
     updateMinutesRouter: require('./api/chatGPT/minutes/update')
 };
@@ -15,7 +15,7 @@ const api = {
 router.use("/api/login", api.loginRouter);
 router.use("/api/register", api.registerRouter);
 router.use("/api/sendmail", api.mailRouter);
-router.use("/api/group/create", api.createGroupRouter);
+router.use("/api", api.groupRouter);
 router.use("/api/gpt/minutes/create", api.createMinutesRouter);
 router.use("/", api.updateMinutesRouter);
 
