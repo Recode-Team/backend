@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('minutes', {
+  return sequelize.define('whiteboard', {
     id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
@@ -11,22 +11,23 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       allowNull: true
     },
-    title: {
-      type: DataTypes.TEXT,
-      allowNull: false
-    },
-    transcription: {
-      type: DataTypes.TEXT,
+    name: {
+      type: DataTypes.STRING(50),
       allowNull: false,
-      comment: "요약하기 전의 대화"
+      defaultValue: ""
     },
-    summary: {
-      type: DataTypes.TEXT,
-      allowNull: false
+    comment: {
+      type: DataTypes.STRING(200),
+      allowNull: true
+    },
+    creater: {
+      type: DataTypes.STRING(50),
+      allowNull: false,
+      defaultValue: "0"
     }
   }, {
     sequelize,
-    tableName: 'minutes',
+    tableName: 'whiteboard',
     timestamps: true,
     indexes: [
       {

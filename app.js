@@ -29,11 +29,11 @@ app.use(function(req, res, next) {
     next();
 });
 app.use(cors());
-app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerFile)) 
 
 const router = require("./routes/index");
-app.use("/", router);
+app.use(router);
 
+app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerFile)) 
 app.use((err, req, res, next) => {
     err.status = err.status || 500;
     res.status(err.status);

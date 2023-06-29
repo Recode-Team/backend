@@ -36,19 +36,20 @@ router.post("/", async(req, res) => {
     // email not found
     if(userEmail == undefined){
         result['status']  = "not found";
-        result['results'] = {"target" : "email"};
+        result['results'] = {"name" : undefined, "data": "email"};
         res.status(404).send(result);
     }
     // password not found
     else if(userPass == undefined){
         result['status']  = "not found";
-        result['results'] = {"target" : "password"};
+        result['results'] = {"name" : undefined, "data": "password"};
         res.status(404).send(result);
     }
     else{
         token = jwt.sign({
             type: 'JWT',
             name: email,
+            nickname: userPass['name'],
           }, JWT_KEY, {
             expiresIn: '15m', // 만료시간 15분
             issuer: 'yhw',
