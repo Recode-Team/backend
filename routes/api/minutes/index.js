@@ -2,9 +2,9 @@ const express = require("express");
 const router = express.Router();
 
 const api = {
-    group: require("./groupController"),
+    minutes: require("./minutesController"),
 };
 
-router.use("/", api.group);
+router.use("/", api.minutes);
 
 module.exports = router;

@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('minutes', {
+  return sequelize.define('groupalarm', {
     id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
@@ -9,24 +9,21 @@ module.exports = function(sequelize, DataTypes) {
     },
     group_id: {
       type: DataTypes.INTEGER,
-      allowNull: true
-    },
-    title: {
-      type: DataTypes.TEXT,
-      allowNull: false
-    },
-    transcription: {
-      type: DataTypes.TEXT,
       allowNull: false,
-      comment: "요약하기 전의 대화"
+      defaultValue: 0
     },
-    summary: {
-      type: DataTypes.TEXT,
+    email: {
+      type: DataTypes.STRING(50),
       allowNull: false
+    },
+    alarm: {
+      type: DataTypes.STRING(200),
+      allowNull: false,
+      defaultValue: "0"
     }
   }, {
     sequelize,
-    tableName: 'minutes',
+    tableName: 'groupalarm',
     timestamps: true,
     indexes: [
       {

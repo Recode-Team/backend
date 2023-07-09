@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `chatting` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `group_id` int(20) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `text` varchar(100) NOT NULL,
+  `text` varchar(200) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `group` (
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8mb3;
 
 -- 내보낼 데이터가 선택되어 있지 않습니다.
 
@@ -46,8 +46,9 @@ CREATE TABLE IF NOT EXISTS `group` (
 CREATE TABLE IF NOT EXISTS `groupalarm` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `group_id` int(11) NOT NULL DEFAULT 0,
+  `email` varchar(50) COLLATE armscii8_bin NOT NULL,
   `alarm` varchar(200) CHARACTER SET armscii8 NOT NULL DEFAULT '0',
-  `created_at` int(11) NOT NULL DEFAULT 0,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=armscii8 COLLATE=armscii8_bin;
 
@@ -58,8 +59,8 @@ CREATE TABLE IF NOT EXISTS `groupuser` (
   `group_id` int(20) NOT NULL,
   `email` varchar(50) NOT NULL COMMENT 'user-email',
   `name` varchar(50) NOT NULL COMMENT 'use group nickname',
-  `alarm` int(11) NOT NULL DEFAULT 1 COMMENT '1 or 0',
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`group_id`,`email`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
@@ -68,6 +69,7 @@ CREATE TABLE IF NOT EXISTS `groupuser` (
 -- 테이블 recode.minutes 구조 내보내기
 CREATE TABLE IF NOT EXISTS `minutes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `group_id` int(11) DEFAULT NULL,
   `title` text NOT NULL,
   `transcription` text NOT NULL COMMENT '요약하기 전의 대화',
   `summary` text NOT NULL,
@@ -88,13 +90,14 @@ CREATE TABLE IF NOT EXISTS `user` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3;
 
 -- 내보낼 데이터가 선택되어 있지 않습니다.
 
 -- 테이블 recode.whiteboard 구조 내보내기
 CREATE TABLE IF NOT EXISTS `whiteboard` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `group_id` int(11) DEFAULT NULL,
   `name` varchar(50) CHARACTER SET utf8mb3 NOT NULL DEFAULT '',
   `comment` varchar(200) CHARACTER SET utf8mb3 DEFAULT NULL,
   `creater` varchar(50) CHARACTER SET utf8mb3 NOT NULL DEFAULT '0',

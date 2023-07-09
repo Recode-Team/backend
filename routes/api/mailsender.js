@@ -10,7 +10,8 @@ const transporter = nodeMailer.createTransport({
   auth: { user: MAIL_ID, pass: MAIL_PASSWORD },
 })
 
-router.post("/code", function(req, res, next){
+// send mail code
+router.post("/", function(req, res, next){
   let email = req.body.email;
   let result = {"results":{}, "status":""};
   let key = Math.random().toString(36).substring(2, 12).toUpperCase();

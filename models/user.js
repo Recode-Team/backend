@@ -18,6 +18,10 @@ module.exports = function(sequelize, DataTypes) {
     name: {
       type: DataTypes.STRING(50),
       allowNull: false
+    },
+    image: {
+      type: DataTypes.STRING(50),
+      allowNull: true
     }
   }, {
     sequelize,

@@ -15,12 +15,8 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(50),
       allowNull: false
     },
-    group_name: {
-      type: DataTypes.STRING(50),
-      allowNull: false
-    },
     text: {
-      type: DataTypes.STRING(100),
+      type: DataTypes.STRING(200),
       allowNull: false
     }
   }, {
