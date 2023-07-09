@@ -16,26 +16,29 @@ router.post("/", async(req, res, next) => {
       }).catch(err => {
         console.error(err);
       });      
-    if (user_check == null){
+    if (user_check != null){
         result['status'] = "conflict";
         result['error'] = "존재하는 email입니다"
         res.status(409).send(result);
+        console.log(user_check)
     }
+    else {
+        const user = await sequelize.user.create(
+                {email: email, password: hashed, name: name})
+            .catch(err => {
+                console.error(err)
+            })
 
-    const user = await sequelize.user.create(
-            {email: email, password: hashed, name: name})
-        .catch(err => {
-            console.error(err)
-        })
-
-    if (user != undefined) {
-        result['status'] = "ok";
-        res.status(200).send(result);
+        if (user != undefined) {
+            result['status'] = "ok";
+            res.status(200).send(result);
+        }
+        else {
+            result['status'] = "not found";
+            result['error'] = "다시 시도해주세요"
+            res.status(404).send(result);
+        }
     }
-
-    result['status'] = "not found";
-    result['error'] = "다시 시도해주세요"
-    res.status(404).send(result);
 })
 
 
