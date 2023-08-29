@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `groupalarm` (
 CREATE TABLE IF NOT EXISTS `groupuser` (
   `group_id` int(20) NOT NULL,
   `email` varchar(50) NOT NULL COMMENT 'user-email',
-  `name` varchar(50) NOT NULL COMMENT 'use group nickname',
+  `groupname` varchar(50) NOT NULL COMMENT 'use group nickname',
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`group_id`,`email`) USING BTREE
