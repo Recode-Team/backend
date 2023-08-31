@@ -9,7 +9,7 @@ const router = express.Router();
 // create
 router.post("/", verifyToken, async (req, res) => {
   try {
-    const { name, comment } = req.body;
+    const { groupname, comment } = req.body;
     const token = req.headers.authorization.split(" ")[0];
 
     console.log(token)
@@ -17,16 +17,16 @@ router.post("/", verifyToken, async (req, res) => {
       if (err) {
         res.status(401).json({"error": "Invalid token" });
       } else {
-        const { name: email, nickname: name } = decoded; // 토큰에서 사용자 이름 추출
+        const { name: email, nickname: userName } = decoded; // 토큰에서 사용자 이름 추출
         const group = await sequelize.group.create({
-          name,
+          groupname,
           comment,
           creator: email // 사용자 이름을 creator 필드에 할당
         });
         const groupuesr = await sequelize.groupuser.create({
           group_id : group.id,
           email : email,
-          name : name
+          name : userName
         });
          res.status(200).json({"status": "ok"});
       }
