@@ -18,13 +18,13 @@ router.post('/', verifyToken, async (req, res) => {
         res.status(401).json({ error: 'Invalid token' });
       } else {
         const { name: email, nickname: userName } = decoded; // 토큰에서 사용자 이름 추출
-        const group = await sequelize.group.create({
+        const groupStatus = await sequelize.group.create({
           groupname,
           groupcomment,
           creator: email, // 사용자 이름을 creator 필드에 할당
         });
         const groupuesr = await sequelize.groupuser.create({
-          group_id: group.id,
+          group_id: groupStatus.id,
           email: email,
           name: userName,
         });
@@ -46,11 +46,11 @@ router.get('/', verifyToken, async (req, res) => {
       if (err) {
         res.status(401).json({ error: 'Invalid token' });
       } else {
-        const { name: userName } = decoded; // 토큰에서 사용자 이름 추출
+        const { name: email } = decoded; // 토큰에서 사용자 이름 추출
 
-        const group = await sequelize.group.findAll({
+        const group = await sequelize.groupuser.findAll({
           where: {
-            creator: userName,
+            email: email,
           },
         });
 
