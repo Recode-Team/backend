@@ -53,11 +53,16 @@ router.get('/', verifyToken, async (req, res) => {
             email: email,
           },
         });
-
+        const groupIds = group.map(item => item.group_id);
+        const groupInfo = await sequelize.group.findAll({
+          where: {
+            id: groupIds, 
+          },
+        });
         if (!group) {
           res.status(404).json({ error: 'Group not found' });
         } else {
-          res.status(200).json(group);
+          res.status(200).json(groupInfo);
         }
       }
     });
