@@ -120,7 +120,7 @@ router.delete('/:id', verifyToken, async (req, res) => {
             group_id: groupId,
           },
         });
-        if (deletedBoard === 0) {
+        if (deletedGroupBoard === 0) {
           res.status(404).json({ error: 'Board not found' });
         } else {
           res.status(200).json({ state: 'ok' });

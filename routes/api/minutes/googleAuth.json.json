@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "lofty-memento-399813",
+  "private_key_id": "ea08a207ab331c5a166d08713e3fd72c1a661e04",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCtJ7e0nm8mxQht\n9jnbxs8cN6HLnelwiXiRn1wygMlAjbNShLAcp64JDcHY2jTUzjUkxv3GIBq80NiI\n3NlN5eP+fZXH+/itFgkR8EIK9sBJ0R151CM64Xqj0K3cSEYpYlVqyt0ITuhc0+7w\ndU1Gt8l/minuON1r548WzaPmGjyWHcS34msR7UNvebQ8HvMM7MLE6aas6Z3mWPZw\nJQlYm1swQN3ox24ioknW6iatMf8dvxKl9FJvneW1L9s0Uay5kM3faN0qRrRr9v8O\n3nNs+aGrBPFHrkuPIQRQWwm4i02lQUyRLW0XboP4MrCmSWlmV64IjZYKjyLy4Mci\n5vrMYT9DAgMBAAECggEAUmYrKp2WgVmUCFf68pYqKuBiczYDR5VztcCjLDlTDBAi\nfKs973TwAcj1LU+xgm9apNS5IRZYAvBTitWl50b19z4mD9PdY+ivikTN+M+xc686\nmqYT2cpBBUGh6sjN8pWj1j0RcAm006/a7by0eGmvTrS7LW0MGXRJCG31h+OGX1yk\nw5dWCHZytptLzX/4PlOpx/vn0+6NAV4R9nj1t4iDtfah2ara9IgVb6PSw5G9iDZA\nih05ZwrHqd4qiX4erKEWRHc1hfa2NF0Arb0zIoh7T+fjMy7Dow+ozZqoPnxPQXm5\nZWPpx/zSvS9CUPaLxKE0XYGXU6FBPzfHWd2RXU6w+QKBgQDURQgRrl7C2cI58GSb\nnvtV2RbqYNdWMYjmNpl8YMEpHO1OdWi/Va3sU+Dq/v7w5l7toycaOOMFTwYsC37i\ngFX1XsPHxUbdGrh5WnDnAMeOhLOTtseByJQyX5kXwQedYvRDg7ntG0i+K/N3/McN\nMFCEQhHclQhuOteAoBncax1tTwKBgQDQ08+9FVd2Z+FOHGIC7aC31++6y9vmI+HK\nh54EsarWpyjYN4xiBdsbm5G867wayLOUC4NKBi7h1qVeB2rcMbJF0cY0hRngkVnu\nJwlji9e7mBhKY+knWr6p2x/Rw3e4+m1SFUNfLzU9Y1uvOX8ahllOYS6U9kn2tBqo\nDljkVpwZzQKBgBVUDliAdcMMUEi0D9fXJJfepT/NlTVy6rd++vMVYbM41dtRTsIS\n4NPjJbFXB9S6wQUNpKss1hq9cvhP+2LU1E5ARFm5R8KFoc2HudpsKKD4UnbgIbG3\nrrRVCLPrUFGPFM4H2VGqsSdykRcYTgPUO/LeFJ9eVieFQAwLii2skZtfAoGATY3M\nQcmyQLwVlZ++2p2LqZsdYf8hvJeo3EF/cvjUnIFaDuqaTTEljVw6RLI7mqrc3mdk\nK9KeCKthoMkaa4pdTca5WHnyAU+Z2XNP7lNaHEZBByeRyFbQJl7Fs25ngSAoB2r0\nKV5r5E+JFktBJAWvFwfKd/H7yA5dM/qYEr0DniUCgYEAzzAOmk7I8Fq25u3S6OMk\nTmfBps1K09V/f2xu5Pa7/Rq4pXBj3qRUvkHoi26nOGXKfJ395IX4rFb7Byhpmg/7\n20ZO1kfrW/VAZr4xbae3/K4z0530tTXLuVAX/usws0Sqt3apn+af49DhT55M9I0a\n+SaSpSZVrHvbfmcw83BR8Ng=\n-----END PRIVATE KEY-----\n",
+  "client_email": "hkl2023@lofty-memento-399813.iam.gserviceaccount.com",
+  "client_id": "112322918763432663148",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/hkl2023%40lofty-memento-399813.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
