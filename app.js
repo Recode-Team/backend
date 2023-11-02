@@ -9,6 +9,7 @@ const fs = require('fs');
 const https = require('https');
 
 require("dotenv").config({ path: ".env" });
+const { SERVER_URL, SERVER_PORT } = process.env;
 
 const options = {
     key: fs.readFileSync('recode.key'),       // 개인 키 파일 경로
@@ -16,7 +17,7 @@ const options = {
   };
 
 const app = express();
-app.set("port", 27000);
+app.set("port", SERVER_PORT);
 
 app.use(helmet());
 app.use(express.urlencoded({ extended: false }));
@@ -48,7 +49,7 @@ app.use((err, req, res, next) => {
 
 //서버 실행
 app.listen(app.get("port"), function() {
-    console.log(`127.0.0.1:${app.get("port")}`);
+    console.log(SERVER_URL+`:${app.get("port")}`);
 });
 
 https.createServer(options, app).listen(27443, () => {
