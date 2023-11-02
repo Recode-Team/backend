@@ -1,7 +1,7 @@
-const Sequelize = require("sequelize");
+const Sequelize = require('sequelize');
 module.exports = function (sequelize, DataTypes) {
   return sequelize.define(
-    "group",
+    'board',
     {
       id: {
         autoIncrement: true,
@@ -9,29 +9,35 @@ module.exports = function (sequelize, DataTypes) {
         allowNull: false,
         primaryKey: true,
       },
-      groupname: {
-        type: DataTypes.STRING(50),
-        allowNull: false,
+      group_id: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
       },
-      groupcomment: {
+      boardname: {
         type: DataTypes.STRING(50),
         allowNull: false,
+        defaultValue: '',
       },
-      creator: {
+      boardcomment: {
+        type: DataTypes.STRING(200),
+        allowNull: true,
+      },
+      creater: {
         type: DataTypes.STRING(50),
         allowNull: false,
+        defaultValue: 0,
       },
     },
     {
       sequelize,
-      tableName: "group",
+      tableName: 'board',
       timestamps: true,
       indexes: [
         {
-          name: "PRIMARY",
+          name: 'PRIMARY',
           unique: true,
-          using: "BTREE",
-          fields: [{ name: "id" }],
+          using: 'BTREE',
+          fields: [{ name: 'id' }],
         },
       ],
     }
