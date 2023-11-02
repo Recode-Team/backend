@@ -32,8 +32,8 @@ CREATE TABLE IF NOT EXISTS `chatting` (
 -- 테이블 recode.group 구조 내보내기
 CREATE TABLE IF NOT EXISTS `group` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL,
-  `comment` varchar(50) NOT NULL,
+  `groupname` varchar(50) NOT NULL,
+  `groupcomment` varchar(50) NOT NULL,
   `creator` varchar(50) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `groupalarm` (
 CREATE TABLE IF NOT EXISTS `groupuser` (
   `group_id` int(20) NOT NULL,
   `email` varchar(50) NOT NULL COMMENT 'user-email',
-  `groupname` varchar(50) NOT NULL COMMENT 'use group nickname',
+  `name` varchar(50) NOT NULL COMMENT 'use group nickname',
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`group_id`,`email`) USING BTREE
@@ -94,18 +94,17 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 -- 내보낼 데이터가 선택되어 있지 않습니다.
 
--- 테이블 recode.whiteboard 구조 내보내기
-CREATE TABLE IF NOT EXISTS `whiteboard` (
+-- 테이블 recode.board 구조 내보내기
+CREATE TABLE IF NOT EXISTS `board` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `group_id` int(11) DEFAULT NULL,
-  `name` varchar(50) CHARACTER SET utf8mb3 NOT NULL DEFAULT '',
-  `comment` varchar(200) CHARACTER SET utf8mb3 DEFAULT NULL,
+  `boardname` varchar(50) CHARACTER SET utf8mb3 NOT NULL DEFAULT '',
+  `boardcomment` varchar(200) CHARACTER SET utf8mb3 DEFAULT NULL,
   `creater` varchar(50) CHARACTER SET utf8mb3 NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=armscii8 COLLATE=armscii8_bin;
-
 -- 내보낼 데이터가 선택되어 있지 않습니다.
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

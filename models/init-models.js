@@ -1,11 +1,11 @@
-var DataTypes = require("sequelize").DataTypes;
-var _chatting = require("./chatting");
-var _group = require("./group");
-var _groupalarm = require("./groupalarm");
-var _groupuser = require("./groupuser");
-var _minutes = require("./minutes");
-var _user = require("./user");
-var _whiteboard = require("./whiteboard");
+var DataTypes = require('sequelize').DataTypes;
+var _chatting = require('./chatting');
+var _group = require('./group');
+var _groupalarm = require('./groupalarm');
+var _groupuser = require('./groupuser');
+var _minutes = require('./minutes');
+var _user = require('./user');
+var _board = require('./board');
 
 function initModels(sequelize) {
   var chatting = _chatting(sequelize, DataTypes);
@@ -14,8 +14,7 @@ function initModels(sequelize) {
   var groupuser = _groupuser(sequelize, DataTypes);
   var minutes = _minutes(sequelize, DataTypes);
   var user = _user(sequelize, DataTypes);
-  var whiteboard = _whiteboard(sequelize, DataTypes);
-
+  var board = _board(sequelize, DataTypes);
 
   return {
     chatting,
@@ -24,7 +23,7 @@ function initModels(sequelize) {
     groupuser,
     minutes,
     user,
-    whiteboard,
+    board,
   };
 }
 module.exports = initModels;

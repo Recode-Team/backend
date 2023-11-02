@@ -9,7 +9,7 @@ const router = express.Router();
 // create
 router.post('/', verifyToken, async (req, res) => {
   try {
-    const { groupname, groupcomment } = req.body;
+    const { id, boardname, boardcomment } = req.body;
     const token = req.headers.authorization.split(' ')[0];
 
     console.log(token);
@@ -18,27 +18,23 @@ router.post('/', verifyToken, async (req, res) => {
         res.status(401).json({ error: 'Invalid token' });
       } else {
         const { name: email, nickname: userName } = decoded; // 토큰에서 사용자 이름 추출
-        const group = await sequelize.group.create({
-          groupname,
-          groupcomment,
-          creator: email, // 사용자 이름을 creator 필드에 할당
-        });
-        const groupuesr = await sequelize.groupuser.create({
-          group_id: group.id,
-          email: email,
-          name: userName,
+        const board = await sequelize.board.create({
+          group_id: id,
+          boardname,
+          boardcomment,
+          creator: email,
         });
         res.status(200).json({ status: 'ok' });
       }
     });
   } catch (err) {
     console.log(err);
-    res.status(500).json({ error: 'Failed to create group' });
+    res.status(500).json({ error: 'Failed to create board' });
   }
 });
 
 // read
-router.get('/', verifyToken, async (req, res) => {
+router.get('/:id', verifyToken, async (req, res) => {
   try {
     const token = req.headers.authorization.split(' ')[0]; // 토큰을 헤더에서 추출
 
@@ -46,24 +42,25 @@ router.get('/', verifyToken, async (req, res) => {
       if (err) {
         res.status(401).json({ error: 'Invalid token' });
       } else {
-        const { name: userName } = decoded; // 토큰에서 사용자 이름 추출
+        // const { groupid: groupId } = decoded; // 토큰에서 사용자 이름 추출
+        const id = req.params.id;
 
-        const group = await sequelize.group.findAll({
+        const board = await sequelize.board.findAll({
           where: {
-            creator: userName,
+            group_id: id,
           },
         });
 
-        if (!group) {
-          res.status(404).json({ error: 'Group not found' });
+        if (!board) {
+          res.status(404).json({ error: 'Board not found' });
         } else {
-          res.status(200).json(group);
+          res.status(200).json(board);
         }
       }
     });
   } catch (err) {
     console.log(err);
-    res.status(500).json({ error: 'Failed to fetch group' });
+    res.status(500).json({ error: 'Failed to fetch board' });
   }
 });
 
@@ -71,7 +68,7 @@ router.get('/', verifyToken, async (req, res) => {
 router.put('/:id', verifyToken, async (req, res) => {
   try {
     const groupId = req.params.id;
-    const { groupname, groupcomment } = req.body;
+    const { boardname, boardcomment } = req.body;
     const token = req.headers.authorization.split(' ')[0]; // 토큰을 헤더에서 추출
 
     jwt.verify(token, JWT_KEY, async (err, decoded) => {
@@ -80,10 +77,10 @@ router.put('/:id', verifyToken, async (req, res) => {
       } else {
         const { name: userName } = decoded; // 토큰에서 사용자 이름 추출
 
-        const updatedGroup = await sequelize.group.update(
+        const updatedBoard = await sequelize.board.update(
           {
-            groupname,
-            groupcomment,
+            boardname,
+            boardcomment,
           },
           {
             where: {
@@ -94,7 +91,7 @@ router.put('/:id', verifyToken, async (req, res) => {
         );
 
         if (updatedGroup[0] === 0) {
-          res.status(404).json({ error: 'Group not found' });
+          res.status(404).json({ error: 'Board not found' });
         } else {
           res.status(200).json({ state: 'ok' });
         }
@@ -102,7 +99,7 @@ router.put('/:id', verifyToken, async (req, res) => {
     });
   } catch (err) {
     console.log(err);
-    res.status(500).json({ error: 'Failed to update group' });
+    res.status(500).json({ error: 'Failed to update board' });
   }
 });
 
@@ -118,40 +115,13 @@ router.delete('/:id', verifyToken, async (req, res) => {
       } else {
         const { name: userName } = decoded; // 토큰에서 사용자 이름 추출
 
-        // 그룹 삭제
-        const deletedGroup = await sequelize.group.destroy({
-          where: {
-            id: groupId,
-            creator: userName,
-          },
-        });
-        const deletedGroupUser = await sequelize.groupuser.destroy({
-          where: {
-            group_id: groupId,
-          },
-        });
-        const deletedGroupAlarm = await sequelize.groupalarm.destroy({
-          where: {
-            group_id: groupId,
-          },
-        });
-        const deletedGroupMinute = await sequelize.minutes.destroy({
-          where: {
-            group_id: groupId,
-          },
-        });
-        const deletedGroupChatting = await sequelize.chatting.destroy({
-          where: {
-            group_id: groupId,
-          },
-        });
         const deletedGroupBoard = await sequelize.board.destroy({
           where: {
             group_id: groupId,
           },
         });
-        if (deletedGroup === 0) {
-          res.status(404).json({ error: 'Group not found' });
+        if (deletedBoard === 0) {
+          res.status(404).json({ error: 'Board not found' });
         } else {
           res.status(200).json({ state: 'ok' });
         }
@@ -159,7 +129,7 @@ router.delete('/:id', verifyToken, async (req, res) => {
     });
   } catch (err) {
     console.log(err);
-    res.status(500).json({ error: 'Failed to delete group' });
+    res.status(500).json({ error: 'Failed to delete board' });
   }
 });
 
