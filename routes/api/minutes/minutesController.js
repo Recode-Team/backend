@@ -4,6 +4,7 @@ const speech = require("@google-cloud/speech");
 const multer = require("multer");
 const { minutes } = require("../../../models");
 const verifyToken = require("../../../token/verifyToken");
+const { Sequelize } = require("sequelize");
 const upload = multer();
 
 // GPT API key
@@ -19,13 +20,13 @@ const router = express.Router();
 
 // create
 router.post(
-  "/:group",
+  "/:id",
   verifyToken,
   upload.single("audioFile"),
   async (req, res) => {
     const audioFile = req.file.buffer;
     const filename = req.file.originalname;
-    const group = req.file.group;
+    const boardId = req.params.id;
 
     // Google Cloud Storage bucket setting
     const { Storage } = require("@google-cloud/storage");
@@ -120,8 +121,13 @@ router.post(
       console.log(titleJson);
       const title = await titleJson.choices[0].text;
 
+      const groupId = await Sequelize.board.findOne({
+        where: { id: boardId },
+      });
+
       const dresult = await minutes
         .create({
+          group_id: groupId,
           transcription: speechTranscription,
           summary: summary,
           title: title,
